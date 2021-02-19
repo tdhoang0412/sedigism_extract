@@ -26,7 +26,7 @@ if __name__ == '__main__':
         cpix_lat  = convert[1]
 
 
-        # Convert subcube radius from world to pixel coordinate
+        # Convert subcube size from world to pixel coordinate
         pix = 9.5 # pixel size [arcseconds]
         extsize_pix = extsize/pix
 

@@ -5,7 +5,7 @@ from astropy import units as u
 from astropy.wcs import WCS
 
 if __name__ == '__main__':
-    text
+    
     # Inputs of function
     line = '13CO21'
     fieldcenter = '001'

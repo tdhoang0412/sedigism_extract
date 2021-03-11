@@ -11,7 +11,7 @@ if __name__ == '__main__':
     fieldcenter = '001'
     clon = 1.0  # Galatic longtitude of extracted cube [deg]
     clat = 0.0 # Galatic latitutde of extracted cube [deg]
-    extsize = 900 # half size of the extracted cube [arcsecond] (e.g. +/- 100")
+    extsize = 150 # half size of the extracted cube [arcsecond] (e.g. +/- 100")
 
     # Read in datacube
     fitfile = 'G'+fieldcenter+'_'+line+'_Tmb_DR1.fits'
@@ -20,10 +20,10 @@ if __name__ == '__main__':
     # Convert subcube center from world to pixel coordinate
     cworld = SkyCoord(l=clon,b=clat,unit=(u.deg, u.deg),frame='galactic')
     w = WCS(datacube.header)
-    convert = w.world_to_pixel(cworld,3000*u.m/u.s)
+    convert = w.all_world2pix(cworld.l.deg,cworld.b.deg,3000,1)
+
     cpix_long = convert[0]
     cpix_lat  = convert[1]
-
 
     # Convert subcube size from world to pixel coordinate
     pix = 9.5 # pixel size [arcseconds]
@@ -45,4 +45,4 @@ if __name__ == '__main__':
     subcube_header['CRVAL2']  = clat
     subcube_header['CRPIX2']  = cpix_lat - lat_range[0]
 
-    fits.writeto('long_lat_size_Tmb.fits',subcube,header=subcube_header,overwrite=True)
+    fits.writeto('./outcube/subcube_long_lat_size_Tmb.fits',subcube,header=subcube_header,overwrite=True)
